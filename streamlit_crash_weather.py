@@ -7,7 +7,7 @@ import streamlit as st
 
 
 # Load data
-data = pd.read_excel("CrashData.xlsx")
+data = pd.read_csv("CrashData.csv")
 
 # Set up Streamlit app
 st.title("Weather and CRashes Analysis")
