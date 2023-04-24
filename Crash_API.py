@@ -53,7 +53,7 @@ df = df.applymap(convert_to_int)
 month_map = {i: calendar.month_name[i] for i in range(1, 13)}
 df['CRASH_MONTH'] = df['CRASH_MONTH'].apply(lambda x: month_map[x] if pd.notna(x) else x)
 
-day_map = {1: 'Sunday', 2: 'Monday', 3: 'Tuesday', 4: 'Wednesday', 5: 'Thur`sday', 6: 'Friday', 7: 'Saturday'}
+day_map = {1: 'Sunday', 2: 'Monday', 3: 'Tuesday', 4: 'Wednesday', 5: 'Thursday', 6: 'Friday', 7: 'Saturday'}
 df['DAY_OF_WEEK'] = df['DAY_OF_WEEK'].map(day_map)
 
 ##Grouping by variables of interest
