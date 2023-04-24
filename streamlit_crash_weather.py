@@ -10,7 +10,7 @@ import streamlit as st
 data = pd.read_csv("CrashData.csv")
 
 # Set up Streamlit app
-st.title("Weather and CRashes Analysis")
+st.title("Weather and Crashes Analysis")
 
 # Show data
 st.write("## Data")
@@ -32,7 +32,7 @@ else:
 st.write("## Crashes by Months")
 crashes_by_months = filtered_data.groupby(['CRASH_MONTH']).size().reset_index(name='counts')
 fig, ax = plt.subplots()
-sns.barplot(x='CRASH_MONTH', y='counts', data=crashes_by_months, ax=ax, palette='viridis')
+sns.barplot(x='Month', y='Counts', data=crashes_by_months, ax=ax, palette='viridis')
 plt.xticks(rotation=90)
 st.pyplot(fig)
 
@@ -52,7 +52,7 @@ else:
 st.write("## Crashes by Day")
 crashes_by_day = filtered_data.groupby(['DAY_OF_WEEK']).size().reset_index(name='counts')
 fig, ax = plt.subplots()
-sns.barplot(x='DAY_OF_WEEK', y='counts', data=crashes_by_day, ax=ax, palette='viridis')
+sns.barplot(x='Day', y='Counts', data=crashes_by_day, ax=ax, palette='viridis')
 plt.xticks(rotation=90)
 st.pyplot(fig)
 
