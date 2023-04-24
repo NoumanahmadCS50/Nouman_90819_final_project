@@ -37,7 +37,10 @@ chart_month = alt.Chart(crashes_by_month).mark_bar().encode(
     x=alt.X('CRASH_MONTH', sort=month_order),
     y='counts',
     tooltip=['CRASH_MONTH', 'counts']
-).properties(axis=alt.Axis(title='Number of crashes', labelsFontSize=14, titleFontSize=16)width=600, height=400, title='Crashes by Month')
+).properties(
+    axis=alt.Axis(title='Number of crashes', labelsFontSize=14, titleFontSize=16),
+    width=600, height=400, title='Crashes by Month'
+)
 st.altair_chart(chart_month)
 
 
