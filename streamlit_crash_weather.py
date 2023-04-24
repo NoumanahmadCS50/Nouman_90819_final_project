@@ -32,7 +32,7 @@ else:
 st.write("## Crashes by Months")
 crashes_by_months = filtered_data.groupby(['CRASH_MONTH']).size().reset_index(name='counts')
 fig, ax = plt.subplots()
-sns.barplot(x='Month', y='Counts', data=crashes_by_months, ax=ax, palette='viridis')
+sns.barplot(x='CRASH_MONTH', y='Counts', data=crashes_by_months, ax=ax, palette='viridis')
 plt.xticks(rotation=90)
 st.pyplot(fig)
 
@@ -52,7 +52,7 @@ else:
 st.write("## Crashes by Day")
 crashes_by_day = filtered_data.groupby(['DAY_OF_WEEK']).size().reset_index(name='counts')
 fig, ax = plt.subplots()
-sns.barplot(x='Day', y='Counts', data=crashes_by_day, ax=ax, palette='viridis')
+sns.barplot(x='DAY_OF_WEEK', y='Counts', data=crashes_by_day, ax=ax, palette='viridis')
 plt.xticks(rotation=90)
 st.pyplot(fig)
 
