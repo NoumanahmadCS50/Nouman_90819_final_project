@@ -32,6 +32,7 @@ df = pd.DataFrame(crash_data_2018)
 cols_to_keep = ["_id","CRASH_COUNTY","CRASH_MONTH","DAY_OF_WEEK","FATAL_COUNT","FATAL_OR_MAJ_INJ","HOUR_OF_DAY","ICY_ROAD","INJURY","INJURY_COUNT","INJURY_OR_FATAL","MAJ_INJ_COUNT","MAJOR_INJURY","MIN_INJ_COUNT","MINOR_INJURY","MOD_INJ_COUNT","MODERATE_INJURY","TIME_OF_DAY","TOT_INJ_COUNT","WEATHER","WET_ROAD"]
 df.drop(columns=[col for col in df.columns if col not in cols_to_keep], inplace=True)
 df = df[~df['_id'].isin([5238,9157,9349])]
+df.dropna(inplace=True)
 
 ##Reordering rows and columns
 df = df.sort_index(axis=1)
@@ -39,12 +40,19 @@ df = df.sort_values('_id')
 col = df.pop('_id')
 df.insert(0, '_id', col)
 
+##Extracting hour
+df['HOUR_OF_DAY'] = df['TIME_OF_DAY'].astype(str).str.zfill(4).str[:2].astype(int)
+df = df[df['TIME_OF_DAY'] != '9999']
 
 ##Coverting all the possible strings to int
 def convert_to_int(x):
-    try:
+    if isinstance(x, int):
+        return x
+    elif isinstance(x, str) and x.isdigit():
         return int(x)
-    except (ValueError, TypeError):
+    elif x == '0n':
+        return None
+    else:
         return x
 df = df.applymap(convert_to_int)
 
@@ -54,16 +62,6 @@ df['CRASH_MONTH'] = df['CRASH_MONTH'].apply(lambda x: month_map[x] if pd.notna(x
 
 day_map = {1: 'Sunday', 2: 'Monday', 3: 'Tuesday', 4: 'Wednesday', 5: 'Thursday', 6: 'Friday', 7: 'Saturday'}
 df['DAY_OF_WEEK'] = df['DAY_OF_WEEK'].map(day_map)
-
-##Grouping by variables of interest
-grouped_hour = df.groupby('TIME_OF_DAY').sum()
-grouped_hour = grouped_hour.reset_index()
-grouped_day = df.groupby('DAY_OF_WEEK').sum()
-grouped_day = grouped_day.reset_index()
-grouped_month = df.groupby('CRASH_MONTH').sum()
-grouped_month = grouped_month.reset_index()
-grouped_weather = df.groupby('WEATHER').sum()
-grouped_weather = grouped_weather.reset_index()
 
 #Writing the clean data into an csv file
 df.to_csv('Crashdata.csv', index=True)
