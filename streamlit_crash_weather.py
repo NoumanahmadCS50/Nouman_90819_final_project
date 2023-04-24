@@ -58,8 +58,8 @@ st.pyplot(fig)
 
 # Plot a line chart of the monthly crime occurrences by average temperature
 st.write("## Monthly crashes by average temperature")
-monthly_crash = filtered_data.groupby(pd.Grouper(key='CRASH_MONTH', freq='M')).size().reset_index(name='counts')
-monthly_weather = filtered_data.groupby(pd.Grouper(key='CRASH_MONTH', freq='M')).agg({'WEATHER': 'mean'}).reset_index()
+monthly_crash = filtered_data.set_index('DATE').resample('M')['CRASH_MONTH'].count().reset_index(name='counts')
+monthly_weather = filtered_data.set_index('DATE').resample('M')['WEATHER'].mean().reset_index()
 monthly_weather['avg_temp'] = (monthly_weather['WEATHER'])
 monthly_data = pd.merge(monthly_crime, monthly_weather, on='CRASH_MONTH', how='outer')
 monthly_data = monthly_data.dropna()
