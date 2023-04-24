@@ -27,6 +27,9 @@ if selected_category == "All":
     filtered_data = data
 else:
     filtered_data = data[data['CRASH_MONTH'] == selected_category]
+    
+crashes_by_months = filtered_data.groupby(['CRASH_MONTH']).size().reset_index(name='counts')
+crashes_by_months = crashes_by_months.dropna()
 
 # Plot a bar chart of the crashes by month
 st.write("## Crashes by Month")
