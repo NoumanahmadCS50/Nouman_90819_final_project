@@ -94,8 +94,8 @@ filtered_data = crashes_by_temperature[
 ]
 
 chart = alt.Chart(filtered_data).mark_line().encode(
-    x="WEATHER:Q",
-    y="counts:Q",
+    x=alt.X('WEATHER:Q', axis=alt.Axis(title='Temperature')),
+    y=alt.Y('counts:Q', axis=alt.Axis(title='Number of crashes')),
     tooltip=["WEATHER", "counts"]
 ).properties(width=600, height=400, title="Crashes by Temperature")
 
