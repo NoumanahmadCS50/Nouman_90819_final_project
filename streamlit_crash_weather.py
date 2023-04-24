@@ -19,8 +19,6 @@ st.write(data)
 st.write("Use the dropdown menu to select a specific month or reset to display all months. The visualizations will be updated accordingly.")
 
 # Create a dropdown menu for selecting the crash    `1 month
-
-data['CRASH_MONTH'] = pd.to_numeric(data['CRASH_MONTH'], errors='coerce')
 crash_month = data['CRASH_MONTH'].unique().tolist()
 selected_category = st.selectbox("Select a month ", ["All"] + crash_month)
 
