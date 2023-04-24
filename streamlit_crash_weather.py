@@ -68,10 +68,12 @@ filtered_data['DAY_OF_WEEK'] = pd.Categorical(filtered_data['DAY_OF_WEEK'], cate
 st.write("## Crashes by Day")
 crashes_by_day = filtered_data.groupby(['DAY_OF_WEEK']).size().reset_index(name='counts')
 chart_day = alt.Chart(crashes_by_day).mark_bar().encode(
-    x=alt.X('DAY_OF_WEEK', sort=day_order),
-    y='counts',
+    x=alt.X('DAY_OF_WEEK', sort=day_order, axis=alt.Axis(title='Day')),
+    y=alt.Y('counts', axis=alt.Axis(title='Number of crashes')),
     tooltip=['DAY_OF_WEEK', 'counts']
 ).properties(width=600, height=400, title='Crashes by Day')
+
+x=alt.X('CRASH_MONTH', sort=month_order, axis=alt.Axis(title='Month')),
 st.altair_chart(chart_day)
 
 
