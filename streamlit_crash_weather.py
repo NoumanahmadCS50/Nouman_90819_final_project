@@ -34,8 +34,8 @@ st.write("<h2 style='text-align: center; font-size: 36px;'>Total number of crash
 # Plot a bar chart of the crashes by month with the ordered x-axis
 st.write("## Crashes by Month")
 chart_month = alt.Chart(crashes_by_month).mark_bar().encode(
-    x=alt.X('CRASH_MONTH', sort=month_order, axis=alt.Axis(title='Number of crashes')),
-    y='counts',
+    x=alt.X('CRASH_MONTH', sort=month_order, axis=alt.Axis(title='Month')),
+    y=alt.Y('counts', axis=alt.Axis(title='Number of crashes')),
     tooltip=['CRASH_MONTH', 'counts']
 ).properties(
     title='Crashes by Month',
