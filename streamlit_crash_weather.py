@@ -34,7 +34,7 @@ st.write("<h2 style='text-align: center; font-size: 36px;'>Total number of crash
 # Plot a bar chart of the crashes by month with the ordered x-axis
 st.write("## Crashes by Month")
 chart_month = alt.Chart(crashes_by_month).mark_bar().encode(
-    x=alt.X('CRASH_MONTH', sort=month_order),
+    x=alt.X('CRASH_MONTH', sort=month_order, axis=alt.Axis(title='Number of crashes')),
     y='counts',
     tooltip=['CRASH_MONTH', 'counts']
 ).properties(
@@ -47,11 +47,6 @@ chart_month = alt.Chart(crashes_by_month).mark_bar().encode(
 ).configure_title(
     fontSize=18
 )
-
-st.altair_chart(chart_month)
-
-
-
 
 st.write("Use the dropdown menu to select a specific day or reset to display all days. The visualizations will be updated accordingly.")
 
