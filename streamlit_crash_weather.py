@@ -122,7 +122,6 @@ filtered_data = crashes_by_temperature[
 chart = alt.Chart(filtered_data).mark_line().encode(
     x=alt.X('HOUR_OF_DAY:Q', axis=alt.Axis(title='Hour')),
     y=alt.Y('counts:Q', axis=alt.Axis(title='Number of crashes')),
-    x="HOUR_OF_DAY:Q",
     tooltip=["HOUR_OF_DAY", "counts"]
 ).properties(width=600, height=400, title="Crashes by Hour")
 
