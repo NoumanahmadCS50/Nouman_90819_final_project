@@ -9,7 +9,6 @@ Created on Fri Apr 21 23:26:22 2023
 import ckanapi
 import calendar
 import pandas as pd
-import numpy as np
 
 #Defining the main site
 
@@ -66,10 +65,5 @@ grouped_month = grouped_month.reset_index()
 grouped_weather = df.groupby('WEATHER').sum()
 grouped_weather = grouped_weather.reset_index()
 
-#Writing the clean data into an excel file
-with pd.ExcelWriter('CrashData.xlsx') as writer:
-    df.to_excel(writer, sheet_name='Overall data', index = False)
-    grouped_hour.to_excel(writer, sheet_name='Grouped by Hour',index = False)
-    grouped_day.to_excel(writer, sheet_name='Grouped by Day',index = False)
-    grouped_month.to_excel(writer, sheet_name='Grouped by Month',index = False)
-    grouped_weather.to_excel(writer, sheet_name='Grouped by Weather',index = False)
+#Writing the clean data into an csv file
+df.to_csv('Crashdata.csv', index=True)
