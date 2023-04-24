@@ -38,7 +38,13 @@ chart_month = alt.Chart(crashes_by_month).mark_bar().encode(
     y='counts',
     tooltip=['CRASH_MONTH', 'counts']
 ).properties(width=600, height=400, title='Crashes by Month')
+chart_month = chart_month.properties(
+    axis=alt.Axis(title='Number of crashes', labelsFontSize=14, titleFontSize=16)
+)
 st.altair_chart(chart_month)
+
+
+
 
 st.write("Use the dropdown menu to select a specific day or reset to display all days. The visualizations will be updated accordingly.")
 
