@@ -17,9 +17,6 @@ st.write(data)
 crash_month = data['CRASH_MONTH'].unique().tolist()
 selected_category = st.selectbox("Select a month ", ["All"] + crash_month)
 
-total_crashes = filtered_data.shape[0]
-st.write("<h2 style='text-align: center; font-size: 36px;'>Total number of crashes in Alleghany County: {}</h2>".format(total_crashes), unsafe_allow_html=True)
-
 # Filter the data based on the selected month
 if selected_category == "All":
     filtered_data = data
@@ -30,7 +27,10 @@ month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', '
 filtered_data['CRASH_MONTH'] = pd.Categorical(filtered_data['CRASH_MONTH'], categories=month_order, ordered=True)
 crashes_by_month = filtered_data.groupby(['CRASH_MONTH']).size().reset_index(name='counts')
 
+total_crashes = filtered_data.shape[0]
+st.write("<h2 style='text-align: center; font-size: 36px;'>Total number of crashes in Alleghany County: {}</h2>".format(total_crashes), unsafe_allow_html=True)
 
+st.write("Use the dropdown menu to select a specific month or reset to display all months. The visualizations will be updated accordingly.")
 
 # Plot a bar chart of the crashes by month with the ordered x-axis
 st.write("## Crashes by Month")
