@@ -12,17 +12,13 @@ st.title("Seasonality in Crashes")
 st.write("## Data")
 st.write(data)
 
+
+# Create a dropdown menu for selecting the crash month
 crash_month = data['CRASH_MONTH'].unique().tolist()
 selected_category = st.selectbox("Select a month ", ["All"] + crash_month)
 
 total_crashes = filtered_data.shape[0]
 st.write("<h2 style='text-align: center; font-size: 36px;'>Total number of crashes in Alleghany County: {}</h2>".format(total_crashes), unsafe_allow_html=True)
-
-st.write("Use the dropdown menu to select a specific month or reset to display all months. The visualizations will be updated accordingly.")
-
-# Create a dropdown menu for selecting the crash month
-crash_month = data['CRASH_MONTH'].unique().tolist()
-selected_category = st.selectbox("Select a month ", ["All"] + crash_month)
 
 # Filter the data based on the selected month
 if selected_category == "All":
