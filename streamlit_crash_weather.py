@@ -28,10 +28,6 @@ if selected_category == "All":
 else:
     filtered_data = data[data['CRASH_MONTH'] == selected_category]
 
-# Use .loc to set values on the original DataFrame
-filtered_data.loc[:, 'CRASH_MONTH'] = pd.to_datetime(filtered_data['CRASH_MONTH'])
-filtered_data.loc[:, 'weather_category'] = pd.cut((filtered_data['high_temp'] + filtered_data['low_temp']) / 2, bins=[-100, 32, 60, 80, 1000], labels=['Freezing (<=0°C)', 'Cool (0°C to 15°C)', 'Warm (15°C to 26°C)', 'Hot (>26°C)'])
-
 # Plot a bar chart of the crahses by months
 st.write("## Crashes by Months")
 crashes_by_months = filtered_data.groupby(['CRASH_MONTH']).size().reset_index(name='counts')
@@ -51,10 +47,6 @@ if selected_category == "All":
     filtered_data = data
 else:
     filtered_data = data[data['DAY_OF_WEEK'] == selected_category]
-
-# Use .loc to set values on the original DataFrame
-filtered_data.loc[:, 'DAY_OF_WEEK'] = pd.to_datetime(filtered_data['DAY_OF_WEEK'])
-filtered_data.loc[:, 'weather_category'] = pd.cut((filtered_data['high_temp'] + filtered_data['low_temp']) / 2, bins=[-100, 32, 60, 80, 1000], labels=['Freezing (<=0°C)', 'Cool (0°C to 15°C)', 'Warm (15°C to 26°C)', 'Hot (>26°C)'])
 
 # Plot a bar chart of the crashes by day
 st.write("## Crashes by Day")
