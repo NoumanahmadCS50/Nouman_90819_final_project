@@ -47,6 +47,7 @@ chart_month = alt.Chart(crashes_by_month).mark_bar().encode(
 ).configure_title(
     fontSize=18
 )
+st.altair_chart(chart_month)
 
 st.write("Use the dropdown menu to select a specific day or reset to display all days. The visualizations will be updated accordingly.")
 
