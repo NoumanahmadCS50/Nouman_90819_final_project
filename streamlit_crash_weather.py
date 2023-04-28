@@ -1,3 +1,5 @@
+#Importing Relevant Libraries
+
 import altair as alt
 import pandas as pd
 import streamlit as st
@@ -23,13 +25,14 @@ if selected_category == "All":
 else:
     filtered_data = data[data['CRASH_MONTH'] == selected_category]
 
+#Setting the order of the month column using pd.Categorical
 month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 filtered_data['CRASH_MONTH'] = pd.Categorical(filtered_data['CRASH_MONTH'], categories=month_order, ordered=True)
 crashes_by_month = filtered_data.groupby(['CRASH_MONTH']).size().reset_index(name='counts')
 
+#Grouping the filtered data by month
 total_crashes = filtered_data.shape[0]
 st.write("<h2 style='text-align: center; font-size: 36px;'>Total number of crashes in Alleghany County: {}</h2>".format(total_crashes), unsafe_allow_html=True)
-
 
 # Plot a bar chart of the crashes by month with the ordered x-axis
 st.write("## Crashes by Month")
@@ -74,6 +77,8 @@ chart_day = alt.Chart(crashes_by_day).mark_bar().encode(
 ).properties(width=600, height=400, title='Crashes by Day')
 
 x=alt.X('CRASH_MONTH', sort=month_order, axis=alt.Axis(title='Month')),
+
+#Display the chart
 st.altair_chart(chart_day)
 
 
@@ -127,4 +132,5 @@ chart = alt.Chart(filtered_data).mark_line().encode(
 
 st.write("<h2 style='text-align: center; font-size: 36px;'>Highest number of crashes recorded during rush hours.</h2>", unsafe_allow_html=True)
 
+#Display the chart
 st.altair_chart(chart)
