@@ -1,31 +1,24 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Apr 21 23:26:22 2023
-
-@author: Nouman Ahmed
-"""
-
 #Importing relevant libraries
 import ckanapi
 import calendar
 import pandas as pd
 
-#Defining the main site
-
+#The main site
 site = "https://data.wprdc.org"
 
-#Defining the functiong to fetch complete data
+#Defining the functiong to fetch complete data (This was given in the API documentation)
 def get_resource_data(site,resource_id,count=50):
     ckan = ckanapi.RemoteCKAN(site)
     response = ckan.action.datastore_search(id=resource_id, limit=count)
     data = response['records']
     return data
 
+#Fetching the data
 crash_data_2018 = get_resource_data(site,resource_id="48f30bee-e404-4cf5-825b-b0da3c975e45",count=999999999) 
 
 #Data cleaning
 
-##Reading the data into dataframe
+##Reading the data into df
 df = pd.DataFrame(crash_data_2018)
 
 ## Removing unnecessary columns and null rows
